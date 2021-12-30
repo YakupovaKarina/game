@@ -28,4 +28,3 @@ a = a - 1
 l = MsgBox ("Ты ничего не ввел. Выйти из программы?",36,"Угадайка")
 If l = 6 Then WScript.Quit
 End If
-Loop[github.txt](https://github.com/YakupovaKarina/game/files/7793644/github.txt)
