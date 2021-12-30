@@ -1,37 +1,53 @@
-## Welcome to GitHub Pages
+Tprint("" * 10, " Игра Крестики-нолики для двух игроков ", "" * 10)
 
-You can use the [editor on GitHub](https://github.com/YakupovaKarina/game/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/YakupovaKarina/game/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+board = list(range(1,10))
+def draw_board(board):
+print("-" * 13)
+for i in range(3):
+print("|", board[0+i3], "|", board[1+i3], "|", board[2+i*3], "|")
+print("-" * 13)
+def take_input(player_token):
+valid = False
+while not valid:
+player_answer = input("Куда поставим " + player_token+"? ")
+try:
+player_answer = int(player_answer)
+except:
+print("Некорректный ввод. Вы уверены, что ввели число?")
+continue
+if player_answer >= 1 and player_answer <= 9:
+if(str(board[player_answer-1]) not in "XO"):
+board[player_answer-1] = player_token
+valid = True
+else:
+print("Эта клетка уже занята!")
+else:
+print("Некорректный ввод. Введите число от 1 до 9.")
+def check_win(board):
+win_coord = ((0,1,2), (3,4,5), (6,7,8), (0,3,6), (1,4,7), (2,5,8), (0,4,8), (2,4,6))
+for each in win_coord:
+if board[each[0]] == board[each[1]] == board[each[2]]:
+return board[each[0]]
+return False
+def main(board):
+counter = 0
+win = False
+while not win:
+draw_board(board)
+if counter % 2 == 0:
+take_input("X")
+else:
+take_input("O")
+counter += 1
+if counter > 4:
+tmp = check_win(board)
+if tmp:
+print(tmp, "выиграл!")
+win = True
+break
+if counter == 9:
+print("Ничья!")
+break
+draw_board(board)
+main(board)
+input("Нажмите Enter для выхода!")
